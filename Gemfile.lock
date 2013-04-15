@@ -30,6 +30,8 @@ GEM
       sprockets
       sprockets-helpers
       sprockets-sass
+    sinatra-ember (0.0.2)
+      sinatra
     sprockets (2.9.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -53,4 +55,5 @@ DEPENDENCIES
   haml
   sinatra
   sinatra-asset-pipeline
+  sinatra-ember
   thin

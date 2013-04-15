@@ -1,0 +1,23 @@
+<form>
+  <fieldset>
+    {{view Em.TextField action="search" placeholder="Type something..."}}
+    <span class="help-block">Example block-level help text here.</span>
+  </fieldset>
+</form>
+
+<table class="table table-condensed table-striped">
+  <tr>
+    <th>id</th>
+    <th>bt</th>
+    <th>name</th>
+    <th>props</th>
+  </tr>
+  {{#each content}}
+    <tr>
+      <td>{{id}}</td>
+      <td>{{bt}}</td>
+      <td>{{name}}</td>
+      <td>{{summary this}}</td>
+    </tr>
+  {{/each}}
+</table>

@@ -1,3 +1,8 @@
 #= require d3
 #= require jquery
-console.log "Hola"
+#= require vendor/handlebars
+#= require vendor/ember
+#= require_tree ./helpers
+#= require app
+#= require routes
+#= require_tree ./models
