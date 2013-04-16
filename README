@@ -1,0 +1,4 @@
+Heap dump (https://github.com/vasfed/heap_dump) frontend.
+Linux/Mac compatible.
+
+Expects dump to placed inside data/dump.json
