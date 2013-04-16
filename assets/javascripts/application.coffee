@@ -5,4 +5,3 @@
 #= require_tree ./helpers
 #= require app
 #= require routes
-#= require_tree ./models
