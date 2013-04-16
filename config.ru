@@ -24,11 +24,20 @@ class App < Sinatra::Base
   get '/search' do
     response.headers["Content-Type"] = "application/json"
     return "[]" if params[:q].empty?
-    res = `grep #{params[:q]} data/dump.json`.split("\n").map do |s|
+    res = `grep "#{params[:q].inspect}" data/dump.json`.split("\n").map do |s|
       s.match(/\A[^{]({.*})\Z/)
       $1
     end.compact.join(",")
     "[#{res}]"
+  end
+
+  get '/object' do
+    response.headers["Content-Type"] = "application/json"
+    return "{}" if params[:q].empty?
+    `grep '"id":#{params[:q]}' data/dump.json`.split("\n").map do |s|
+      s.match(/\A[^{]({.*})\Z/)
+      $1
+    end.compact.first
   end
 end
 

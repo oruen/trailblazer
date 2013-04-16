@@ -14,7 +14,7 @@
   </tr>
   {{#each content}}
     <tr>
-      <td>{{id}}</td>
+      <td>{{#linkTo "object" this}}{{id}}{{/linkTo}}</td>
       <td>{{bt}}</td>
       <td>{{name}}</td>
       <td>{{summary this}}</td>
