@@ -4,10 +4,20 @@ App.ObjectRoute = Em.Route.extend({
   },
   serialize: function(model) {
     return {id: model.id};
+  },
+  renderTemplate: function() {
+    this._super();
+    this.render('related', {
+      into: 'object',
+      outlet: 'related',
+      controller: this.controllerFor('related')
+    });
+  },
+  setupController: function(controller, model) {
+    this._super();
+    var self = this;
+    $.getJSON("/related", {q: model.id}).then(function(related) {
+      self.controllerFor('related').set('content', related);
+    });
   }
-  //deserialize: function(params) {
-    //var proxy = Em.ObjectProxy.create({content: {id: params}});
-    //this.model(params).then(function(d) { proxy.set("content", d); });
-    //return proxy;
-  //}
 });

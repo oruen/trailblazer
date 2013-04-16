@@ -24,20 +24,28 @@ class App < Sinatra::Base
   get '/search' do
     response.headers["Content-Type"] = "application/json"
     return "[]" if params[:q].empty?
-    res = `grep "#{params[:q].inspect}" data/dump.json`.split("\n").map do |s|
-      s.match(/\A[^{]({.*})\Z/)
-      $1
-    end.compact.join(",")
+    res = normalize(`grep "#{params[:q].inspect}" data/dump.json`).join(",")
     "[#{res}]"
   end
 
   get '/object' do
     response.headers["Content-Type"] = "application/json"
     return "{}" if params[:q].empty?
-    `grep '"id":#{params[:q]}' data/dump.json`.split("\n").map do |s|
+    normalize(`grep '"id":#{params[:q]}' data/dump.json`).first
+  end
+
+  get '/related' do
+    response.headers["Content-Type"] = "application/json"
+    return "[]" if params[:q].empty?
+    res = normalize(`grep #{params[:q]} data/dump.json | grep -v '"id":#{params[:q]}'`).join(",")
+    "[#{res}]"
+  end
+
+  def normalize res
+    res.split("\n").map do |s|
       s.match(/\A[^{]({.*})\Z/)
       $1
-    end.compact.first
+    end.compact
   end
 end
 
