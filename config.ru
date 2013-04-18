@@ -31,13 +31,13 @@ class App < Sinatra::Base
   get '/object' do
     response.headers["Content-Type"] = "application/json"
     return "{}" if params[:q].empty?
-    normalize(`grep '"id":#{params[:q]}' data/dump.json`).first
+    normalize(`grep -E '"id":"?#{params[:q]}' data/dump.json`).first
   end
 
   get '/related' do
     response.headers["Content-Type"] = "application/json"
     return "[]" if params[:q].empty?
-    res = normalize(`grep #{params[:q]} data/dump.json | grep -v '"id":#{params[:q]}'`).join(",")
+    res = normalize(`grep #{params[:q]} data/dump.json | grep -v -E '"id":"?#{params[:q]}'`).join(",")
     "[#{res}]"
   end
 
