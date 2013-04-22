@@ -3,7 +3,7 @@ Em.Handlebars.registerBoundHelper("summary", function(obj) {
   for (i in obj) {
     if (obj.hasOwnProperty(i)) {
       var str = JSON.stringify(obj[i]);
-      str = str.replace(/(\d+){4,}/g, function(m) {return "<a href=\"#/object/" + m + "\">" + m + "</a>"})
+      str = str.replace(/(\d+){4,}/g, function(m) {return "<a href=\"#/object/" + m + "\">" + m + "</a>"}).replace(/,"/g, ", \"");
       res.push("<strong>" + i + "</strong>: " + str);
     }
   }
